@@ -43,3 +43,6 @@ Desenvolver o back-end para um sistema de controle de estoque e gerenciamento de
 * gerenciar ingrediente
 * gerenciar produto
 * gerenciar pedido
+
+## Diagrama de Classes
+![](https://github.com/dmrsilva/dessert-delivery/blob/627e461add66236b4625bf37951050ad8fb17e48/class-diagram.png)
