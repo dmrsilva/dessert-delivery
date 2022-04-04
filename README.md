@@ -22,20 +22,24 @@ Desenvolver o back-end para um sistema de controle de estoque e gerenciamento de
 * cadastrar produto
 * atualizar produto
 * excluir produto
+* listar detalhes de um produto específico
 * listar todos os produtos produzidos em um dia de trabalho
 
 **Gerenciar pedido**
 * cadastrar pedido
+* atualizar pedido
 * cancelar pedido
 * consultar status do pedido
 * visualizar todos os pedidos finalizados em um dia de trabalho
+* visualizar todos os pedidos cancelados em um dia de trabalho
 
 ## Permissões
 
 **Usuário**
-* listar todos os ingredientes e quantidade em estoque
-* consultar quantidade em estoque de um ingrediente específico
+* listar detalhes de um produto específico
+* listar todos os produtos produzidos em um dia de trabalho
 * cadastrar pedido
+* atualizar pedido
 * cancelar pedido
 * visualizar status do pedido
 
@@ -45,4 +49,4 @@ Desenvolver o back-end para um sistema de controle de estoque e gerenciamento de
 * gerenciar pedido
 
 ## Diagrama de Classes
-![](https://github.com/dmrsilva/dessert-delivery/blob/627e461add66236b4625bf37951050ad8fb17e48/class-diagram.png)
+![](https://github.com/dmrsilva/dessert-delivery/blob/6b8e49b9edca5de18d6a40c68977c04777c73b76/diagrama-estoque-pedidos-01.png)
