@@ -7,35 +7,35 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.myproject.dessertdelivery.entities.Ingredient;
+import com.myproject.dessertdelivery.entities.Order;
 import com.myproject.dessertdelivery.entities.Product;
 
 @Embeddable
-public class ProductIngredientPK implements Serializable {
+public class OrderProductPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "ingredient_id")
-	private Ingredient ingredient;
+	@JoinColumn(name = "order_id")
+	private Order order;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
-	public ProductIngredientPK() {
+	public OrderProductPK() {
 	}
 
-	public ProductIngredientPK(Ingredient ingredient, Product product) {
-		this.ingredient = ingredient;
+	public OrderProductPK(Order order, Product product) {
+		this.order = order;
 		this.product = product;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public Product getProduct() {
@@ -48,7 +48,7 @@ public class ProductIngredientPK implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ingredient, product);
+		return Objects.hash(order, product);
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class ProductIngredientPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductIngredientPK other = (ProductIngredientPK) obj;
-		return Objects.equals(ingredient, other.ingredient) && Objects.equals(product, other.product);
+		OrderProductPK other = (OrderProductPK) obj;
+		return Objects.equals(order, other.order) && Objects.equals(product, other.product);
 	}
-
+	
 }

@@ -15,22 +15,22 @@ public class ProductIngredient {
 	@EmbeddedId
 	private ProductIngredientPK id = new ProductIngredientPK();	
 	
-	private Integer quantity;
+	private Double quantity;
 	
 	public ProductIngredient() {
 	}
 
-	public ProductIngredient(Product product, Ingredient ingredient, Integer quantity) {
+	public ProductIngredient(Product product, Ingredient ingredient, Double quantity) {
 		id.setProduct(product);
 		id.setIngredient(ingredient);
 		this.quantity = quantity;
 	}
 
-	public Integer getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 

@@ -19,15 +19,17 @@ public class Ingredient implements Serializable {
 	private Long id;
 	
 	private String name;
-	private Integer quantity;
+	private String unitOfMeasure;
+	private Double quantityInStock;
 	
 	public Ingredient() {
 	}
 
-	public Ingredient(Long id, String name, Integer quantity) {
+	public Ingredient(Long id, String name, String unitOfMeasure, Double quantityInStock) {
 		this.id = id;
 		this.name = name;
-		this.quantity = quantity;
+		this.unitOfMeasure = unitOfMeasure;
+		this.quantityInStock = quantityInStock;
 	}
 
 	public Long getId() {
@@ -46,12 +48,20 @@ public class Ingredient implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	public Double getQuantityInStock() {
+		return quantityInStock;
+	}
+
+	public void setQuantityInStock(Double quantityInStock) {
+		this.quantityInStock = quantityInStock;
 	}
 
 	@Override
