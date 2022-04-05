@@ -6,6 +6,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.myproject.dessertdelivery.entities.PK.ProductIngredientPK;
+
 @Entity
 @Table(name = "tb_product_ingredient")
 public class ProductIngredient {

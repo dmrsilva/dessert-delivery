@@ -1,4 +1,4 @@
-package com.myproject.dessertdelivery.entities;
+package com.myproject.dessertdelivery.entities.PK;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -6,6 +6,9 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.myproject.dessertdelivery.entities.Ingredient;
+import com.myproject.dessertdelivery.entities.Product;
 
 @Embeddable
 public class ProductIngredientPK implements Serializable {
