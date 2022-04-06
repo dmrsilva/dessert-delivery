@@ -26,6 +26,14 @@ public class ProductIngredient {
 		this.quantity = quantity;
 	}
 
+	public ProductIngredientPK getId() {
+		return id;
+	}
+
+	public void setId(ProductIngredientPK id) {
+		this.id = id;
+	}
+
 	public Double getQuantity() {
 		return quantity;
 	}
@@ -33,7 +41,7 @@ public class ProductIngredient {
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
