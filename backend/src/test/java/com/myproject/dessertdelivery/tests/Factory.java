@@ -1,5 +1,6 @@
 package com.myproject.dessertdelivery.tests;
 
+import com.myproject.dessertdelivery.dto.IngredientDTO;
 import com.myproject.dessertdelivery.entities.Ingredient;
 import com.myproject.dessertdelivery.entities.Product;
 import com.myproject.dessertdelivery.entities.ProductIngredient;
@@ -23,5 +24,11 @@ public class Factory {
 		ProductIngredient productIngredient = new ProductIngredient(product, ingredient, 0.8);
 		return productIngredient;
 	}
+	
+	public static IngredientDTO createIngredientDTO() {
+		Ingredient ingredient = createIngredient();
+		return new IngredientDTO(ingredient);
+	}
+	
 
 }
