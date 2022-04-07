@@ -34,7 +34,8 @@ public class IngredientService {
 	public IngredientDTO update(Long id, IngredientDTO dto) {
 		try {
 			Ingredient entity = repository.getById(id);
-			copyDtoEntity(dto, entity);		
+			copyDtoEntity(dto, entity);
+			entity = repository.save(entity);
 			return new IngredientDTO(entity);
 		}
 		catch (EntityNotFoundException e) {

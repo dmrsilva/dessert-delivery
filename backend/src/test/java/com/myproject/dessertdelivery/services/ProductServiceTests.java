@@ -19,41 +19,41 @@ import org.mockito.Mockito;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.myproject.dessertdelivery.dto.IngredientDTO;
-import com.myproject.dessertdelivery.entities.Ingredient;
-import com.myproject.dessertdelivery.repositories.IngredientRepository;
+import com.myproject.dessertdelivery.dto.ProductDTO;
+import com.myproject.dessertdelivery.entities.Product;
+import com.myproject.dessertdelivery.repositories.ProductRepository;
 import com.myproject.dessertdelivery.services.exceptions.ResourceNotFoundException;
 import com.myproject.dessertdelivery.tests.Factory;
 
 @ExtendWith(SpringExtension.class)
-public class IngredientServiceTests {
+public class ProductServiceTests {
 
 	@InjectMocks
-	private IngredientService service;
+	private ProductService service;
 	
 	@Mock
-	private IngredientRepository repository;
+	private ProductRepository repository;
 	
 	private Long existingId;
 	private Long nonExistingId;
-	private Ingredient ingredient;
-	private IngredientDTO ingredientDTO;
-	private List<Ingredient> list;
+	private Product product;
+	private ProductDTO productDTO;
+	private List<Product> list;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
 		existingId = 1L;
 		nonExistingId = 2L;
-		ingredientDTO = Factory.createIngredientDTO();
-		ingredient = Factory.createIngredient();
+		product = Factory.createProduct();
+		productDTO = Factory.createProductDTO();
 		list = new ArrayList<>();
-		list.add(ingredient);
+		list.add(product);
 		
 		
-		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(ingredient);
+		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(product);
 		
-		Mockito.when(repository.getById(existingId)).thenReturn(ingredient);
+		Mockito.when(repository.getById(existingId)).thenReturn(product);
 		
 		Mockito.when(repository.getById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 		
@@ -61,46 +61,45 @@ public class IngredientServiceTests {
 		
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId);
 		
-		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(ingredient));
+		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product));
 		
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 		
-		Mockito.when(repository.findAll()).thenReturn(list);
-		
+		Mockito.when(repository.findAll()).thenReturn(list);		
 	}
 	
 	@Test
-	public void insertShouldReturnIngredientDTO() {
+	public void insertShouldReturnProductDTO() {
 		
-		IngredientDTO result = service.insert(ingredientDTO);
+		ProductDTO result = service.insert(productDTO);
 		
 		Assertions.assertNotNull(result);
 
 		Mockito.verify(repository).save(any());
-		
+
 	}
 	
 	@Test
-	public void updateShouldReturnIngredientDTOWhenIdDoesExist() {
+	public void updateShouldReturnProductDTOWhenIdDoesExist() {
 		
-		IngredientDTO result = service.update(existingId, ingredientDTO);
+		ProductDTO result = service.update(existingId, productDTO);
 		
 		Assertions.assertNotNull(result);
-
+		
 		Mockito.verify(repository).getById(existingId);
 		Mockito.verify(repository).save(any());
-
+		
 	}
 	
 	@Test
 	public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 		
 		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			service.update(nonExistingId, ingredientDTO);
+			service.update(nonExistingId, productDTO);
 		});
 		
 	}
-	
+
 	@Test
 	public void deleteShouldDoNothingWhenIdExists() {
 		
@@ -111,7 +110,7 @@ public class IngredientServiceTests {
 		Mockito.verify(repository).deleteById(existingId);
 		
 	}
-	
+
 	@Test
 	public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 		
@@ -122,11 +121,11 @@ public class IngredientServiceTests {
 		Mockito.verify(repository).deleteById(nonExistingId);
 		
 	}
-	
+
 	@Test
-	public void findByIdReturnIngredientDTOWhenIdExists() {
+	public void findByIdReturnProductDTOWhenIdExists() {
 		
-		IngredientDTO result = service.findById(existingId);
+		ProductDTO result = service.findById(existingId);
 		
 		Assertions.assertNotNull(result);
 		
@@ -142,18 +141,16 @@ public class IngredientServiceTests {
 		});
 		
 	}
-	
+
 	@Test
 	public void findAllShouldReturnList() {
 		
-		List<IngredientDTO> result = service.findAll();
+		List<ProductDTO> result = service.findAll();
 		
 		Assertions.assertNotNull(result);
 		
 		Mockito.verify(repository).findAll();
 		
 	}
-	
-	
 	
 }
