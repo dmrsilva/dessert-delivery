@@ -1,5 +1,9 @@
 package com.myproject.dessertdelivery.resources;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -22,6 +26,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myproject.dessertdelivery.dto.IngredientDTO;
 import com.myproject.dessertdelivery.services.IngredientService;
+import com.myproject.dessertdelivery.services.exceptions.ResourceNotFoundException;
 import com.myproject.dessertdelivery.tests.Factory;
 
 @WebMvcTest(IngredientResource.class)
@@ -49,7 +54,18 @@ public class IngredientResourceTests {
 		
 		ingredientDTO = Factory.createIngredientDTO();
 	
-		when(service.findAll()).thenReturn(list);		
+		when(service.findAll()).thenReturn(list);
+		
+		when(service.findById(existingId)).thenReturn(ingredientDTO);
+		when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
+		
+		when(service.insert(any())).thenReturn(ingredientDTO);
+		
+		when(service.update(eq(existingId), any())).thenReturn(ingredientDTO);
+		when(service.update(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
+		
+		doNothing().when(service).delete(existingId);
+		doThrow(ResourceNotFoundException.class).when(service).delete(nonExistingId);
 		
 	}
 	

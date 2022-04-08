@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myproject.dessertdelivery.dto.IngredientDTO;
 import com.myproject.dessertdelivery.entities.Ingredient;
 import com.myproject.dessertdelivery.repositories.IngredientRepository;
+import com.myproject.dessertdelivery.services.exceptions.DatabaseException;
 import com.myproject.dessertdelivery.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -49,6 +51,9 @@ public class IngredientService {
 		}
 		catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Integrity violation");
 		}
 	}
 	

@@ -16,12 +16,14 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.myproject.dessertdelivery.dto.IngredientDTO;
 import com.myproject.dessertdelivery.entities.Ingredient;
 import com.myproject.dessertdelivery.repositories.IngredientRepository;
+import com.myproject.dessertdelivery.services.exceptions.DatabaseException;
 import com.myproject.dessertdelivery.services.exceptions.ResourceNotFoundException;
 import com.myproject.dessertdelivery.tests.Factory;
 
@@ -36,6 +38,7 @@ public class IngredientServiceTests {
 	
 	private Long existingId;
 	private Long nonExistingId;
+	private Long dependentId;
 	private Ingredient ingredient;
 	private IngredientDTO ingredientDTO;
 	private List<Ingredient> list;
@@ -45,6 +48,7 @@ public class IngredientServiceTests {
 		
 		existingId = 1L;
 		nonExistingId = 2L;
+		dependentId = 3L;
 		ingredientDTO = Factory.createIngredientDTO();
 		ingredient = Factory.createIngredient();
 		list = new ArrayList<>();
@@ -60,6 +64,8 @@ public class IngredientServiceTests {
 		Mockito.doNothing().when(repository).deleteById(existingId);
 		
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId);
+		
+		Mockito.doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId);
 		
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(ingredient));
 		
@@ -120,6 +126,17 @@ public class IngredientServiceTests {
 		});
 		
 		Mockito.verify(repository).deleteById(nonExistingId);
+		
+	}
+	
+	@Test
+	public void deleteShouldThrowDatabaseExceptionWhenDependentId() {
+		
+		Assertions.assertThrows(DatabaseException.class, () -> {
+			service.delete(dependentId);
+		});
+		
+		Mockito.verify(repository).deleteById(dependentId);
 		
 	}
 	
