@@ -2,6 +2,7 @@ package com.myproject.dessertdelivery.tests;
 
 import com.myproject.dessertdelivery.dto.IngredientDTO;
 import com.myproject.dessertdelivery.dto.ProductDTO;
+import com.myproject.dessertdelivery.dto.ProductIngredientDTO;
 import com.myproject.dessertdelivery.entities.Ingredient;
 import com.myproject.dessertdelivery.entities.Product;
 import com.myproject.dessertdelivery.entities.ProductIngredient;
@@ -36,5 +37,9 @@ public class Factory {
 		return new ProductDTO(product);
 	}
 	
-
+	public static ProductIngredientDTO createProductIngredientDTO() {
+		ProductIngredient productIngredient = createProductIngredient();
+		return new ProductIngredientDTO(productIngredient);
+	}
+	
 }
